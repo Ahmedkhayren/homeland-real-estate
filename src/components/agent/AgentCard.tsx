@@ -1,0 +1,9 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Building2, Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import { Agent } from "@/types/agent";
+
+export function AgentCard({ agent, eager = false }: { agent: Agent; eager?: boolean }) { const [imageUnavailable, setImageUnavailable] = useState(false); return <article className="group border border-slate-200 bg-white p-4 transition hover:-translate-y-1 hover:border-[#C99545]/60 hover:shadow-lg"><div className="relative aspect-[.95] overflow-hidden bg-slate-100">{imageUnavailable ? <div className="absolute inset-0 grid place-items-center bg-[#EAF0F5] text-[#071A2F]" role="img" aria-label={`${agent.name} photo unavailable`}><Building2 size={25} className="text-[#C99545]" /></div> : <Image loading={eager ? "eager" : "lazy"} onError={() => setImageUnavailable(true)} src={agent.image} alt={agent.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105" />}</div><div className="pt-4"><h2 className="text-sm font-bold text-[#071A2F]">{agent.name}</h2><p className="mt-1 text-xs font-semibold text-[#C99545]">{agent.role}</p><p className="mt-2 text-xs text-slate-500">{agent.specialty}</p><div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-3 text-slate-500"><span className="flex items-center gap-1 text-[10px]"><MapPin size={13} />{agent.location}</span><span className="flex gap-2"><a href={`tel:${agent.phone}`} aria-label={`Call ${agent.name}`} className="hover:text-[#C99545]"><Phone size={14} /></a><a href={`mailto:${agent.email}`} aria-label={`Email ${agent.name}`} className="hover:text-[#C99545]"><Mail size={14} /></a></span></div><Link href={`/agents/${agent.slug}`} className="mt-4 inline-flex text-xs font-bold text-[#071A2F] transition hover:text-[#C99545]">Meet {agent.name.split(" ")[0]} →</Link></div></article>; }
