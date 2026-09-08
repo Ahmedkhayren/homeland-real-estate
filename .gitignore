@@ -2,3 +2,23 @@ node_modules/
 .next/
 .DS_Store
 src/.DS_Store
+
+# environment files
+.env
+.env.local
+.env.*.local
+.env.local.save
+!.env.example
+
+# deployment
+.vercel/
+
+# typescript
+*.tsbuildinfo
+
+# keys
+*.pem
+*.key
+
+# logs
+*.log
